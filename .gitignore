@@ -23,8 +23,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
-obj/
+Support_Your_Locals/*/bin/Debug
+Support_Your_Locals/*/bin/Release
 TestResults/
 ###################
 # Web publish log #
