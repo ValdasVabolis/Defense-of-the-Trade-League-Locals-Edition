@@ -12,7 +12,7 @@ namespace Support_Your_Locals.Controllers
     public class AuthController : Controller
     {
 
-        private ServiceDbContext db;
+        public ServiceDbContext db;
 
         public AuthController(ServiceDbContext db)
         {
