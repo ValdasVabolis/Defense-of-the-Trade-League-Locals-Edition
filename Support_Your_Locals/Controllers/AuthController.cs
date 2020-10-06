@@ -24,7 +24,7 @@ namespace Support_Your_Locals.Controllers
             }
         }
 
-
+        [HttpGet]
         public ViewResult SignIn()
         {
             return View();
