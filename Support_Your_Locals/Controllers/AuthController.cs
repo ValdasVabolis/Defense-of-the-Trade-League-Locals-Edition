@@ -25,9 +25,9 @@ namespace Support_Your_Locals.Controllers
         }
 
 
-        /*public ViewResult SignIn()
+        public ViewResult SignIn()
         {
             return View();
-        }*/
+        }
     }
 }
