@@ -14,7 +14,7 @@ a.navbar-brand {
 .auth-container {
     max-width: 540px;
     margin: 0 auto;
-    margin-top: 240px;
+    margin-top: 128px;
     border-radius: 8px;
     box-shadow: 0 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, .05);
 }
