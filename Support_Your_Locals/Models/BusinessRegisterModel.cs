@@ -5,13 +5,13 @@ namespace Support_Your_Locals.Models
     public class BusinessRegisterModel
     {
 
-        [Required(ErrorMessage = "Please enter the product or activity")]
+        [Required(ErrorMessage = "Please enter your product or activity")]
         public string Product {get; set;}
-        [Required(ErrorMessage = "Please add description")]
+        [Required(ErrorMessage = "Please add your business description")]
         public string Description {get; set;}
-        [Required(ErrorMessage = "Please enter the business phone number")]
+        [Required(ErrorMessage = "Please enter your business phone number")]
         public string PhoneNumber {get; set;}
-        [Required(ErrorMessage = "Please enter header")]
+        [Required(ErrorMessage = "Please enter your business header")]
         public string Header {get; set;}
     }
 }
