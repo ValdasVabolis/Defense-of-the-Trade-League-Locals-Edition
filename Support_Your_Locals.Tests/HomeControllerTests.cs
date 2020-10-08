@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Support_Your_Locals.Controllers;
 using Support_Your_Locals.Models;
 using Xunit;
 
-namespace Support_Your_Locals.Tests {
-    public class HomeControllerTests {
+namespace Support_Your_Locals.Tests
+{
+    public class HomeControllerTests
+    {
 
         [Fact]
         public void IndexActionModelIsComplete()
