@@ -23,8 +23,27 @@ $(document).ready(() => {
        });
    }
    
-   const submitNewPostForm = () => {
-       console.log("Submitting...");
+   const submitNewPostForm = (form) => {
+       const title = form.find('#PostTitle').prop('value');
+       const phoneNumber = form.find('#PostPhoneNumber').prop('value');
+       const email = form.find('#PostEmail').prop('value');
+       const address = form.find('#PostAddress').prop('value');
+       const description = form.find('#PostDescription').prop('value');
+       
+       const checkedBoxes = $('.day-check-box:checked');
+       let times = [];
+       
+       $.each(checkedBoxes, (id, el) => {
+           const elem = $(el);
+           const comboDate = elem.parent().next().find('.combodate');
+           const hourFrom = $(comboDate.get(0)).find('.hour').prop('value');
+           const minuteFrom = $(comboDate.get(0)).find('.minute').prop('value');
+           const hourTo = $(comboDate.get(1)).find('.hour').prop('value');
+           const minuteTo = $(comboDate.get(1)).find('.minute').prop('value');
+           times.push(hourFrom, minuteFrom, hourTo, minuteTo);
+       });
+           
+       console.log(times);
    }
    
    initPostCheckBoxes();
@@ -32,7 +51,7 @@ $(document).ready(() => {
    
    $('#new-post-form').submit((e) => {
        e.preventDefault();
-       submitNewPostForm();
+       submitNewPostForm($(e.target));
    })
    
 });
