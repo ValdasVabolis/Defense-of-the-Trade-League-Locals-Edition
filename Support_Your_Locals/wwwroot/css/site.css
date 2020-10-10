@@ -10,6 +10,18 @@ a.navbar-brand {
 .post-entry {
     margin-bottom: 12px;
 }
+.form-day-check {
+    width: 15%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.work-time-container {
+    display: inline-block;
+}
+
+.day-check-tuple {
+    margin-bottom: 12px;
+}
 
 .auth-container {
     max-width: 540px;

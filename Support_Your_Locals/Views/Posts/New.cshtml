@@ -30,15 +30,23 @@
                     <label for="PostDescription">Description</label>
                     <textarea class="form-control" rows="4" id="PostDescription" placeholder="Post description"></textarea>
                 </div>
+                <div class="form-group">
                 @{
                     foreach (string day in @Model)
                     {
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id=@($"day-{day}")>
-                            <label class="form-check-label" for="exampleCheck1">@day</label>
+                        <div class="day-check-tuple">
+                            <div class="form-check form-day-check">
+                                <input type="checkbox" class="form-check-input day-check-box" id=@($"day-{day}")>
+                                <label class="form-check-label" for="exampleCheck1">@day</label>
+                            </div>
+                            <div class="work-time-container">
+                                <input type="text" class="working-hour-from" placeholder="09">
+                                <input type="text" class="working-hour-to" placeholder="00">
+                            </div>
                         </div>
                     }
                 }
+                </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
