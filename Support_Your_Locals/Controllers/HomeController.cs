@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Support_Your_Locals.Models;
@@ -17,14 +18,12 @@ namespace Support_Your_Locals.Controllers
 
         public IActionResult Index()
         {
-            List<string> skelbimai = new List<string>();
-            skelbimai.Add("Kepejas");
-            skelbimai.Add("Auto-mechanikas");
-            skelbimai.Add("Auklyte");
-            skelbimai.Add("Grindu ploveja");
-            //ViewData["skelbimai"] = skelbimai;
+            var posts = new List<PostModel>()
+            {
+                new PostModel { Title = "Fish", PhoneNumber = "863599081", Address = "Gedimino pr. 9, Vilnius", Description = "Catch the fish and it's yours", Email = "fisherman@gmail.com", TimeSheet = "time"}
+            };
 
-            return View(skelbimai);
+            return View(posts);
         }
 
         public IActionResult Privacy()
