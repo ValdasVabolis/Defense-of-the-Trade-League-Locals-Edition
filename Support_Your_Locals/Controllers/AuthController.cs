@@ -16,12 +16,9 @@ namespace Support_Your_Locals.Controllers
         {
             if (ModelState.IsValid)
             {
-                return View("Index", user);
+                return View("SignUp", user);
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
 
