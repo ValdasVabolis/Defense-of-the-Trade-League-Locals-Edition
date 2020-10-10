@@ -39,6 +39,10 @@ a.navbar-brand {
     margin-bottom: 12px;
 }
 
+.contacts-body label{
+    margin-bottom: 2px;
+}
+
 .auth-container {
     max-width: 540px;
     margin: 0 auto;
