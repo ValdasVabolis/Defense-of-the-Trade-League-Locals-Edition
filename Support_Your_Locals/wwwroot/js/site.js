@@ -4,7 +4,6 @@
 // Write your JavaScript code.
 
 $(document).ready(() => {
-    
    const initPostCheckBoxes = () => {
        const dayCheckBoxes = $('.day-check-box');
        $.each(dayCheckBoxes, (id, el) => {
@@ -24,7 +23,16 @@ $(document).ready(() => {
        });
    }
    
+   const submitNewPostForm = () => {
+       console.log("Submitting...");
+   }
+   
    initPostCheckBoxes();
    initPostWorkingTimes();
+   
+   $('#new-post-form').submit((e) => {
+       e.preventDefault();
+       submitNewPostForm();
+   })
    
 });
