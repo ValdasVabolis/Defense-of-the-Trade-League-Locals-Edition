@@ -48,7 +48,8 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> SignIn(UserLoginModel user) {
+        public async Task<ViewResult> SignIn(UserLoginModel user) 
+        {
             if (ModelState.IsValid)
             {
                 var response = await db.Users.FindAsync(user.Email);
