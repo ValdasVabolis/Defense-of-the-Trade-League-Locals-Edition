@@ -29,12 +29,9 @@ namespace Support_Your_Locals.Controllers
                 await db.Users.AddAsync(user);
                 await db.SaveChangesAsync();
                 var allUsers = await db.Users.ToListAsync();
-                return View("Thanks", allUsers);
+                //return View("Thanks", allUsers);
             }
-            else
-            {
-                return View();
-            }
+            return View();
         }
 
         [HttpGet]
