@@ -21,6 +21,12 @@ namespace Support_Your_Locals.Controllers
 
             return View(days);
         }
+
+        [HttpPost]
+        public IActionResult Create()
+        {
+            return Json("received");
+        }
         
     }
 }
