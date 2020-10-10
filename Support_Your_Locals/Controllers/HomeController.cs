@@ -31,10 +31,6 @@ namespace Support_Your_Locals.Controllers
         {
             return View();
         }
-        public IActionResult Add_advertise()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
