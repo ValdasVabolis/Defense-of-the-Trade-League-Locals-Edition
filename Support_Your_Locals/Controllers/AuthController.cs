@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Support_Your_Locals.Models;
 
 namespace Support_Your_Locals.Controllers
@@ -48,7 +44,7 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> SignIn(UserLoginModel user) 
+        public async Task<ViewResult> SignIn(UserLoginModel user)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +52,7 @@ namespace Support_Your_Locals.Controllers
                 if (response != null) return View("LoggedIn");
                 return View("SignIn", "User not found!");
             }
-            else 
+            else
             {
                 return View();
             }
