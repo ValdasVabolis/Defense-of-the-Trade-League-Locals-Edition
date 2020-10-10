@@ -31,7 +31,7 @@ $(document).ready(() => {
        const description = form.find('#PostDescription').prop('value');
        
        const checkedBoxes = $('.day-check-box:checked');
-       let times = [];
+       let times = {};
        
        $.each(checkedBoxes, (id, el) => {
            const elem = $(el);
@@ -40,9 +40,14 @@ $(document).ready(() => {
            const minuteFrom = $(comboDate.get(0)).find('.minute').prop('value');
            const hourTo = $(comboDate.get(1)).find('.hour').prop('value');
            const minuteTo = $(comboDate.get(1)).find('.minute').prop('value');
-           times.push(hourFrom, minuteFrom, hourTo, minuteTo);
-       });
            
+           times[elem.prop('id')] = {
+               'hourFrom': hourFrom,
+               'minuteFrom': minuteFrom,
+               'hourTo': hourTo,
+               'minuteTo': minuteTo
+           }
+       });
        console.log(times);
    }
    
