@@ -4,13 +4,26 @@
 // Write your JavaScript code.
 
 $(document).ready(() => {
-   const dayCheckBoxes = $('.day-check-box');
-   
-   $.each(dayCheckBoxes, (id, el) => {
-       $(el).on('change', (event) => {
-           const chkBox = $(event.target);
-           const checkState = chkBox.parent().next().prop('hidden');
-           chkBox.parent().next().prop('hidden', !checkState);
+    
+   const initPostCheckBoxes = () => {
+       const dayCheckBoxes = $('.day-check-box');
+       $.each(dayCheckBoxes, (id, el) => {
+           $(el).on('change', (event) => {
+               const chkBox = $(event.target);
+               const checkState = chkBox.parent().next().prop('hidden');
+               chkBox.parent().next().prop('hidden', !checkState);
+           });
        });
-   });
+   }
+   
+   const initPostWorkingTimes = () => {
+       $(".working-hour-from, .working-hour-to").combodate({
+           firstItem: 'name',
+           minuteStep: 1
+       });
+   }
+   
+   initPostCheckBoxes();
+   initPostWorkingTimes();
+   
 });
