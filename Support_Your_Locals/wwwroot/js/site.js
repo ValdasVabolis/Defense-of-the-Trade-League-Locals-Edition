@@ -8,9 +8,9 @@ $(document).ready(() => {
    
    $.each(dayCheckBoxes, (id, el) => {
        $(el).on('change', (event) => {
-           if(event.target.checked) {
-               
-           }
+           const chkBox = $(event.target);
+           const checkState = chkBox.parent().next().prop('hidden');
+           chkBox.parent().next().prop('hidden', !checkState);
        });
    });
 });
