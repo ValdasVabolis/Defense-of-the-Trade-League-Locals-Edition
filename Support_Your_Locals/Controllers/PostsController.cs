@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Support_Your_Locals.Controllers
 {
@@ -9,9 +10,17 @@ namespace Support_Your_Locals.Controllers
         
         public IActionResult New()
         {
-            return View();
+            List<string> days = new List<string>();
+            days.Add("Monday");
+            days.Add("Tuesday");
+            days.Add("Wednesday");
+            days.Add("Thursday");
+            days.Add("Friday");
+            days.Add("Saturday");
+            days.Add("Sunday");
+
+            return View(days);
         }
-        
         
     }
 }
