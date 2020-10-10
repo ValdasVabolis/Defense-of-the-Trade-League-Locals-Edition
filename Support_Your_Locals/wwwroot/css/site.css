@@ -35,6 +35,10 @@ a.navbar-brand {
     margin-bottom: 12px;
 }
 
+.working-hours-label {
+    margin-bottom: 12px;
+}
+
 .auth-container {
     max-width: 540px;
     margin: 0 auto;

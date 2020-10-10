@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" id="PostPhoneNumber" placeholder="Post phone number">
                 </div>
                 <div class="form-group">
-                    <label for="PostEmail">Phone Email</label>
+                    <label for="PostEmail">Email</label>
                     <input type="text" class="form-control" id="PostEmail" placeholder="Post email">
                 </div>
                 <div class="form-group">
@@ -31,23 +31,24 @@
                     <textarea class="form-control" rows="4" id="PostDescription" placeholder="Post description"></textarea>
                 </div>
                 <div class="form-group">
-                @{
-                    foreach (string day in @Model)
-                    {
-                        <div class="day-check-tuple">
-                            <div class="form-check form-day-check">
-                                <input type="checkbox" class="form-check-input day-check-box" id=@($"day-{day}")>
-                                <label class="form-check-label" for=@($"day-{day}")>@day</label>
+                    <label class="working-hours-label">Working Hours</label>
+                    @{
+                        foreach (string day in @Model)
+                        {
+                            <div class="day-check-tuple">
+                                <div class="form-check form-day-check">
+                                    <input type="checkbox" class="form-check-input day-check-box" id=@($"day-{day}")>
+                                    <label class="form-check-label" for=@($"day-{day}")>@day</label>
+                                </div>
+                                <div hidden class="work-time-container">
+                                    <span class="time-from-label">From</span>
+                                    <input type="text" class="working-hour-from" data-format="HH:mm" data-template="HH : mm" name="datetime">
+                                    <span class="time-to-label">To</span>
+                                    <input type="text" class="working-hour-to" data-format="HH:mm" data-template="HH : mm" name="datetime">
+                                </div>
                             </div>
-                            <div hidden class="work-time-container">
-                                <span class="time-from-label">From</span>
-                                <input type="text" class="working-hour-from" data-format="HH:mm" data-template="HH : mm" name="datetime">
-                                <span class="time-to-label">To</span>
-                                <input type="text" class="working-hour-to" data-format="HH:mm" data-template="HH : mm" name="datetime">
-                            </div>
-                        </div>
+                        }
                     }
-                }
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
