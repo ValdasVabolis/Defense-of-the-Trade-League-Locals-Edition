@@ -19,7 +19,8 @@ $(document).ready(() => {
    const initPostWorkingTimes = () => {
        $(".working-hour-from, .working-hour-to").combodate({
            firstItem: 'name',
-           minuteStep: 1
+           minuteStep: 1,
+           customClass: 'form-control'
        });
    }
    

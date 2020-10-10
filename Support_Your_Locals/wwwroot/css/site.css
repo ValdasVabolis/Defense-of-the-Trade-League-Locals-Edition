@@ -19,6 +19,18 @@ a.navbar-brand {
     display: inline-block;
 }
 
+.combodate {
+    margin-right: 16px;
+}
+.combodate .form-control {
+    display:inline-block
+}
+
+.time-from-label, .time-to-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .day-check-tuple {
     margin-bottom: 12px;
 }
