@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Support_Your_Locals.Models
 {
@@ -9,7 +10,7 @@ namespace Support_Your_Locals.Models
         [Required(ErrorMessage = "Please enter your surname")]
         public string Surname { get; set; }
         [Required(ErrorMessage = "Please enter your birth date")]
-        public string BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         [Required(ErrorMessage = "Please enter your email address")]
         public string Email { get; set; }
 
