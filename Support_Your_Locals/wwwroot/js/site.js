@@ -24,6 +24,7 @@ $(document).ready(() => {
    }
    
    const submitNewPostForm = (form) => {
+       const controllerEndpoint = '/Posts/Create';
        const title = form.find('#PostTitle').prop('value');
        const phoneNumber = form.find('#PostPhoneNumber').prop('value');
        const email = form.find('#PostEmail').prop('value');
@@ -31,24 +32,39 @@ $(document).ready(() => {
        const description = form.find('#PostDescription').prop('value');
        
        const checkedBoxes = $('.day-check-box:checked');
-       let times = {};
+       let timeSheet = {};
        
        $.each(checkedBoxes, (id, el) => {
            const elem = $(el);
            const comboDate = elem.parent().next().find('.combodate');
-           const hourFrom = $(comboDate.get(0)).find('.hour').prop('value');
-           const minuteFrom = $(comboDate.get(0)).find('.minute').prop('value');
-           const hourTo = $(comboDate.get(1)).find('.hour').prop('value');
-           const minuteTo = $(comboDate.get(1)).find('.minute').prop('value');
+           const hrFrom = $(comboDate.get(0)).find('.hour').prop('value');
+           const minFrom = $(comboDate.get(0)).find('.minute').prop('value');
+           const hrTo = $(comboDate.get(1)).find('.hour').prop('value');
+           const minTo = $(comboDate.get(1)).find('.minute').prop('value');
            
-           times[elem.prop('id')] = {
-               'hourFrom': hourFrom,
-               'minuteFrom': minuteFrom,
-               'hourTo': hourTo,
-               'minuteTo': minuteTo
+           timeSheet[elem.prop('id')] = {
+               hourFrom: hrFrom,
+               minuteFrom: minFrom,
+               hourTo: hrTo,
+               minuteTo: minTo
            }
        });
-       console.log(times);
+       
+       $.ajax({
+           url: controllerEndpoint, 
+           data: {
+               postTitle: title,
+               postPhoneNumber: phoneNumber,
+               postEmail: email,
+               postAddress: address,
+               postDescription: description,
+               postTimeSheet: JSON.stringify(timeSheet)
+           },
+           success: (result) => {
+               console.log("Endpoint reached!");
+               console.log(result);
+           }
+       });
    }
    
    initPostCheckBoxes();
