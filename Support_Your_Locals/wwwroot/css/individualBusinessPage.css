@@ -1,9 +1,9 @@
 ﻿#frame {
     margin: auto;
     width: 70%;
-    border: 3px solid #73AD21;
+    height: 1000px;
+    border: 20px;
+    border-style: groove;
     padding: 10px;
-
     border-color: aquamarine;
-
 }
