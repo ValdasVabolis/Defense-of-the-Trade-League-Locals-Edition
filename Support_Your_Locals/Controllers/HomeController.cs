@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Support_Your_Locals.Models;
+using Support_Your_Locals.Models.ViewModels;
 
 namespace Support_Your_Locals.Controllers
 {
