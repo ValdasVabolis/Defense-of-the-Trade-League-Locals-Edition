@@ -10,6 +10,6 @@ namespace Support_Your_Locals.Models
 
         }
 
-        public DbSet<UserRegisterModel> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
