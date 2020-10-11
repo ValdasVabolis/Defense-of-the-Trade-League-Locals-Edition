@@ -1,3 +1,7 @@
-﻿body {
-    background-color: blue;
+﻿#frame {
+    border-style: groove;
+    border-width: 2px;
+    border-color: aquamarine;
+    width: 50%;
+    height: 50%;
 }
