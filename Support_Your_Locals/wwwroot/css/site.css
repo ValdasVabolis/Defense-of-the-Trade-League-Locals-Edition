@@ -11,6 +11,19 @@ a.navbar-brand {
     margin-bottom: 12px;
 }
 
+.auth-container {
+    max-width: 540px;
+    margin: 0 auto;
+    margin-top: 128px;
+    border-radius: 8px;
+    box-shadow: 0 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, .05);
+}
+
+.box {
+    padding: 24px;
+}
+
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;

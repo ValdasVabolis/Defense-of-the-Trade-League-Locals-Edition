@@ -22,8 +22,9 @@ namespace Support_Your_Locals.Controllers
             skelbimai.Add("Auto-mechanikas");
             skelbimai.Add("Auklyte");
             skelbimai.Add("Grindu ploveja");
-            ViewData["skelbimai"] = skelbimai;
-            return View();
+            //ViewData["skelbimai"] = skelbimai;
+
+            return View(skelbimai);
         }
 
         public IActionResult Privacy()
