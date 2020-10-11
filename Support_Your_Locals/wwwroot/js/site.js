@@ -49,9 +49,10 @@ $(document).ready(() => {
                minuteTo: minTo
            }
        });
-       
+       console.log(JSON.stringify(timeSheet));
        $.ajax({
-           url: controllerEndpoint, 
+           url: controllerEndpoint,
+           type: 'POST',
            data: {
                postTitle: title,
                postPhoneNumber: phoneNumber,
