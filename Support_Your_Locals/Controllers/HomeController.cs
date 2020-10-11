@@ -17,14 +17,7 @@ namespace Support_Your_Locals.Controllers
 
         public IActionResult Index()
         {
-            List<string> skelbimai = new List<string>();
-            skelbimai.Add("Kepejas");
-            skelbimai.Add("Auto-mechanikas");
-            skelbimai.Add("Auklyte");
-            skelbimai.Add("Grindu ploveja");
-            //ViewData["skelbimai"] = skelbimai;
-
-            return View(skelbimai);
+            return View();
         }
 
         public IActionResult Privacy()
