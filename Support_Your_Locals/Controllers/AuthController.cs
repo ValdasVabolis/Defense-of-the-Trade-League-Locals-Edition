@@ -26,10 +26,10 @@ namespace Support_Your_Locals.Controllers
         {
             if (ModelState.IsValid)
             {
-                await db.Users.AddAsync(user);
+                User newUser = new User {Name = user.Name, Surname = user.Surname, BirthDate = user.BirthDate, Email = user.Email};
+                await db.Users.AddAsync(newUser);
                 await db.SaveChangesAsync();
-                var allUsers = await db.Users.ToListAsync();
-                //return View("Thanks", allUsers);
+                return View("Thanks");
             }
             return View();
         }
