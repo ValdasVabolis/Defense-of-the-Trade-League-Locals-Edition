@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Support_Your_Locals.Models;
+using Support_Your_Locals.Models.Repositories;
 
 namespace Support_Your_Locals
 {
@@ -21,6 +22,7 @@ namespace Support_Your_Locals
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ServiceDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IServiceRepository, ServiceRepositoryDb>();
             services.AddControllersWithViews();
             
         }
