@@ -10,6 +10,38 @@ a.navbar-brand {
 .post-entry {
     margin-bottom: 12px;
 }
+.form-day-check {
+    width: 15%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.work-time-container {
+    display: inline-block;
+}
+
+.combodate {
+    margin-right: 16px;
+}
+.combodate .form-control {
+    display:inline-block
+}
+
+.time-from-label, .time-to-label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.day-check-tuple {
+    margin-bottom: 12px;
+}
+
+.working-hours-label {
+    margin-bottom: 12px;
+}
+
+.contacts-body label{
+    margin-bottom: 2px;
+}
 
 .auth-container {
     max-width: 540px;
