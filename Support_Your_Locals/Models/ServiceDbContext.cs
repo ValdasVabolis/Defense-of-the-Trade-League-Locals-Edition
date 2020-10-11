@@ -11,5 +11,7 @@ namespace Support_Your_Locals.Models
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Business> Business { get; set; }
+
     }
 }
