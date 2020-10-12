@@ -17,5 +17,6 @@ namespace Support_Your_Locals.Models.Repositories
 
         public IQueryable<User> Users => context.Users;
         public IQueryable<Business> Business => context.Business;
+        public IQueryable<TimeSheet> TimeSheets => context.TimeSheets;
     }
 }

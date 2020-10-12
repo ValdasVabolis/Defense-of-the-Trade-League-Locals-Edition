@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Support_Your_Locals.Infrastructure;
 using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
 
@@ -53,6 +54,7 @@ namespace Support_Your_Locals
             {
                 endpoints.MapDefaultControllerRoute();
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }
