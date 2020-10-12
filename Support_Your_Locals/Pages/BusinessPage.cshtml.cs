@@ -23,8 +23,9 @@ namespace Support_Your_Locals.Pages
         public void OnGet(long businessId)
         {
             User user = repository.Users.FirstOrDefault(u => u.UserID == businessId);
-            var query = from t in repository.TimeSheets where t.BusinessID == businessId);
-            IEnumerable<TimeSheet> sheets = (IEnumerable<TimeSheet>)query;
+            var query = from t in repository.TimeSheets where t.BusinessID == businessId select new TimeSheet { TimeSheetID = t.TimeSheetID,
+                BusinessID = businessId, From = t.From, To = t.To, Weekday = t.Weekday};
+                IEnumerable < TimeSheet > sheets = (IEnumerable<TimeSheet>)query;
         }
 
     }
