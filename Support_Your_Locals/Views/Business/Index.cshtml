@@ -1,32 +1,19 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+﻿@model UserBusinessTimeSheets
 
-    <h2 class="text-center">Skelbimo pavadinimas(Head)</h2>
-    <div class="col-sm-4"><img src="https://g3.dcdn.lt/images/pix/braskes-71413768.jpg" style="width:100%"></div>
-    <div class="container">
-        <div class="col-sm-7">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Product</div>
-                <div class="panel-body">Description<br>Description<br>Description<br>Description<br></div>
-            </div>
+@{
+    Layout = "_BusinessPageLayout";
+}
+
+<h2 class="text-center">@Model.Business.Header</h2>
+<div class="col-sm-3"><img src="https://g3.dcdn.lt/images/pix/braskes-71413768.jpg" style="width:100%"></div>
+<div class="container">
+    <div class="col-sm-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">@Model.Business.Product</div>
+            <div class="panel-body">@Model.Business.Description<br></div>
         </div>
     </div>
-    <div class="col-sm-4">
-        <h3>Contacts</h3>
-        <ul>
-            <li>Name</li>
-            <li>Surname</li>
-            <li>Phone number</li>
-        </ul>
-    </div>
-    <div class="col-sm-7">
+    <div class="col-sm-1">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -38,45 +25,49 @@
             <tbody>
                 <tr>
                     <td>Monday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>(@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 1)?.From ?? Closed)</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 1)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Tuesday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 2)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 2)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Wednesday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 3)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 3)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Thursday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 4)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 4)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Friday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 5)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 5)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Saturday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 6)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 6)?.To ?? Closed</td>
                 </tr>
                 <tr>
                     <td>Sunday</td>
-                    <td>13:00</td>
-                    <td>20:00</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 7)?.From ?? Closed</td>
+                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 7)?.To ?? Closed</td>
                 </tr>
             </tbody>
 
         </table>
     </div>
-    
-
-
-</body>
-</html>
+</div>
+<div class="col-sm-4">
+    <h3>Contacts</h3>
+    <ul>
+        <li>@Model.User.Name</li>
+        <li>@Model.User.Surname</li>
+        <li>@Model.Business.PhoneNumber</li>
+    </ul>
+</div>

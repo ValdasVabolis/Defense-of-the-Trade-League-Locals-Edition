@@ -4,22 +4,33 @@
     <div class="bg-faded p-1">
         <h4>
             @Model.Header
-            <span class="badge badge-pill badge-primary" style="float:right">
+            <span class="badge badge-pill badge-primary" style="float: right">
                 <small>
                     @Model.Product
-            </small>
+                </small>
+            </span>
+        </h4>
+    </div>
+    <form asp-controller="Business" asp-action="Index" method="post">
+        <input type="hidden" asp-for="BusinessID" value =@Model.BusinessID/>
+        <!--Inneficient-->
+        <span class="card-text p-1">
+            <!--Owner's name and surname here-->
+            <button type="submit" class="btn btn-success btn-sm pull-right" style="float: right">
+                Go to
+            </button>
         </span>
-    </h4>
-</div>
-<!--<form id="@Model.BusinessID" asp-page="/Cart" method="post">
-    <input type="hidden" asp-for="BusinessID" />
-    <input type="hidden" name="returnUrl"
-           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-    <span class="card-text p-1">-->
-       <!--Owner's name and surname here-->
-       <!-- <button type="submit" class="btn btn-success btn-sm pull-right" style="float: right">
-            Go to
-        </button>
-    </span>
-</form>-->
+    </form>
+
+            <!--<form id="@Model.BusinessID" asp-page="/Cart" method="post">
+            <input type="hidden" asp-for="BusinessID" />
+            <input type="hidden" name="returnUrl"
+                   value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">-->
+            <!--Owner's name and surname here-->
+            <!-- <button type="submit" class="btn btn-success btn-sm pull-right" style="float: right">
+                    Go to
+                </button>
+            </span>
+        </form>-->
 </div>
