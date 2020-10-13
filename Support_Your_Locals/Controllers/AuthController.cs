@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Support_Your_Locals.Models;
@@ -15,14 +16,24 @@ namespace Support_Your_Locals.Controllers
         {
             repository = repo;
         }
-        public void SignUp()
+        
+        public ViewResult SignUp()
         {
-
+            return View();
         }
-        public void SignIn()
+        [HttpPost]
+        public ActionResult SignUp(string email, string name, string surname, DateTime date)
         {
-
+            return Content("Sending: " + email +" "+ name+ " "+ surname+ " " + date.ToString());
         }
-
+        public ViewResult SignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignIn(string email)
+        {
+            return Content("Sending: " + email);
+        }
     }
 }
