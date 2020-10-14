@@ -29,20 +29,19 @@ namespace Support_Your_Locals.Controllers
         [HttpPost]
         public ActionResult SignUp(string email, string name, string surname, DateTime date)
         {
-            
-            int count=repository.Users.Count(b => b.Email == email);
-            if (count == 0)
-            {
-                context.Users.Add(new User { Name = name, Surname = surname, BirthDate = date, Email = email });
-                context.SaveChanges();
-                ViewBag.email = "true";
-                return View();
-            }
-            else
-            {
-                ViewBag.email = "false";
-                return View();
-            }
+            int count = repository.Users.Count(b => b.Email == email);
+                if (count == 0)
+                {
+                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = date, Email = email});
+                    context.SaveChanges();
+                    ViewBag.email = "true";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.email = "false";
+                    return View();
+                }
 
         }
         public ViewResult SignIn()
@@ -53,16 +52,16 @@ namespace Support_Your_Locals.Controllers
         public ActionResult SignIn(string email)
         {
             int count = repository.Users.Count(b => b.Email == email);
-            if (count == 1)
-            {
-                ViewBag.email = "true";
-                return View();
-            }
-            else
-            {
-                ViewBag.email = "false";
-                return View();
-            }
+                if (count == 1)
+                {
+                    ViewBag.email = "true";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.email = "false";
+                    return View();
+                }
         }
     }
 }
