@@ -30,7 +30,7 @@ namespace Support_Your_Locals.Controllers
         public ActionResult SignUp(string email, string name, string surname, DateTime date)
         {
             
-            int count=repository.Users.Where(b => b.Email == email).Count();
+            int count=repository.Users.Count(b => b.Email == email);
             if (count == 0)
             {
                 context.Users.Add(new User { Name = name, Surname = surname, BirthDate = date, Email = email });
