@@ -52,7 +52,17 @@ namespace Support_Your_Locals.Controllers
         [HttpPost]
         public ActionResult SignIn(string email)
         {
-            return Content("Sending: " + email);
+            int count = repository.Users.Where(b => b.Email == email).Count();
+            if (count == 1)
+            {
+                ViewBag.email = "true";
+                return View();
+            }
+            else
+            {
+                ViewBag.email = "false";
+                return View();
+            }
         }
     }
 }
