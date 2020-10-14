@@ -55,6 +55,7 @@ namespace Support_Your_Locals.Controllers
                     Product = businessRegisterModel.Product,
                     PhoneNumber = businessRegisterModel.PhoneNumber
                 };
+                context.Add(business);
                 return View();
             }
             else
