@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
@@ -43,11 +41,15 @@ namespace Support_Your_Locals.Controllers
             if (ModelState.IsValid)
             {
                 Business business = new Business
-                { // Exception here
+                {
+                    // Exception here
                     Header = businessRegisterModel.Header,
                     Description = businessRegisterModel.Description,
-                    UserID = HttpContext.Session.GetJson<User>()
-                }
+                    UserID = HttpContext.Session.GetJson<User>("user").UserID,
+                    Product = businessRegisterModel.Product,
+                    PhoneNumber = businessRegisterModel.PhoneNumber
+                };
+                return View();
             }
             else
             {

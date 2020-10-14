@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
 using Support_Your_Locals.Models.ViewModels;
@@ -55,6 +56,7 @@ namespace Support_Your_Locals.Controllers
                 if (count == 1)
                 {
                     ViewBag.email = "true";
+                    HttpContext.Session.SetJson("user", User);
                     return View();
                 }
                 else
