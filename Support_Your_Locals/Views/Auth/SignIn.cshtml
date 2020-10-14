@@ -16,6 +16,19 @@
             <div class="form-group">
                 <a asp-controller="Auth" asp-action="SignUp">Not a member yet? Sign up</a>
             </div>
+            @if (ViewBag.email == "true")
+            {
+                <div>
+                    <b><label style="color: rgb(0, 255, 0)">Successfully logged in</label></b>
+                </div>
+            }
+            else if (ViewBag.email == "false")
+            {
+                <div>
+                    <b><label style="color: rgb(255, 0, 0)">This email does not exist</label></b>
+                </div>
+            }
+            else { }
             <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
     </div>
