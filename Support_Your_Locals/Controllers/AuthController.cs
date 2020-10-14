@@ -22,18 +22,20 @@ namespace Support_Your_Locals.Controllers
             context = serviceDbContext;
 
         }
-        
+
+        [HttpGet]
         public ViewResult SignUp()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult SignUp(string email, string name, string surname, DateTime date)
+        public ActionResult SignUp(string name, string surname, DateTime birthDate, string email)
         {
             int count = repository.Users.Count(b => b.Email == email);
                 if (count == 0)
                 {
-                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = date, Email = email});
+                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = birthDate, Email = email});
                     context.SaveChanges();
                     ViewBag.email = "true";
                     return View();
@@ -45,18 +47,22 @@ namespace Support_Your_Locals.Controllers
                 }
 
         }
+
+        [HttpGet]
         public ViewResult SignIn()
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult SignIn(string email)
         {
             int count = repository.Users.Count(b => b.Email == email);
+            User user = repository.Users.FirstOrDefault(b => b.Email == email);
                 if (count == 1)
                 {
                     ViewBag.email = "true";
-                    HttpContext.Session.SetJson("user", User);
+                    HttpContext.Session.SetJson("user", user);
                     return View();
                 }
                 else
