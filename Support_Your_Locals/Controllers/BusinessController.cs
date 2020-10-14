@@ -35,6 +35,12 @@ namespace Support_Your_Locals.Controllers
             return View(userBusinessTimeSheets);
         }
 
+        [HttpGet]
+        public ViewResult AddAdvertisement()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ViewResult AddAdvertisement(BusinessRegisterModel businessRegisterModel)
         {

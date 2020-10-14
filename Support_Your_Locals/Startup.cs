@@ -25,7 +25,8 @@ namespace Support_Your_Locals
             services.AddDbContext<ServiceDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IServiceRepository, ServiceRepositoryDb>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
 
         }
 
@@ -46,7 +47,7 @@ namespace Support_Your_Locals
             app.UseStatusCodePages();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -60,7 +61,6 @@ namespace Support_Your_Locals
                 endpoints.MapControllerRoute("pagination", "Products/Page{productPage}",
                     new { Controller = "Home", action = "Index", productPage = 1 });
                 endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
             });
             SeedData.EnsurePopulated(app);
         }

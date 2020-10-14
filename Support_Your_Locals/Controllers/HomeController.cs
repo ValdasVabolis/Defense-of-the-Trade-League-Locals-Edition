@@ -31,15 +31,10 @@ namespace Support_Your_Locals.Controllers
                     ItemsPerPage = PageSize,
                     TotalItems = category == null
                         ? repository.Business.Count()
-                        : repository.Business.Where(b => b.Product == category).Count()
+                        : repository.Business.Count(b => b.Product == category)
                 },
                 CurrentCategory = category
             });
-        }
-
-        public IActionResult Add_advertise()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
