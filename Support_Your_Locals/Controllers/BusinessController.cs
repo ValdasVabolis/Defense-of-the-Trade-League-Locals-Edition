@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
+using Support_Your_Locals.Models.ViewModels;
 
 namespace Support_Your_Locals.Controllers
 {
@@ -11,10 +14,12 @@ namespace Support_Your_Locals.Controllers
     {
 
         private IServiceRepository repository;
+        private ServiceDbContext context;
 
-        public BusinessController(IServiceRepository repo)
+        public BusinessController(IServiceRepository repo, ServiceDbContext ctx)
         {
             repository = repo;
+            context = ctx;
         }
 
         [HttpPost]
@@ -30,6 +35,24 @@ namespace Support_Your_Locals.Controllers
                 TimeSheets = timeSheets
             };
             return View(userBusinessTimeSheets);
+        }
+
+        [HttpPost]
+        public ViewResult AddAdvertisement(BusinessRegisterModel businessRegisterModel)
+        {
+            if (ModelState.IsValid)
+            {
+                Business business = new Business
+                { // Exception here
+                    Header = businessRegisterModel.Header,
+                    Description = businessRegisterModel.Description,
+                    UserID = HttpContext.Session.GetJson<User>()
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
