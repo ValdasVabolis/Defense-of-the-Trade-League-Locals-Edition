@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +14,12 @@ namespace Support_Your_Locals.Controllers
     {
 
         private IServiceRepository repository;
-        public AuthController(IServiceRepository repo)
+        private ServiceDbContext context;
+        public AuthController(IServiceRepository repo, ServiceDbContext serviceDbContext)
         {
             repository = repo;
+            context = serviceDbContext;
+
         }
         
         public ViewResult SignUp()
@@ -24,7 +29,21 @@ namespace Support_Your_Locals.Controllers
         [HttpPost]
         public ActionResult SignUp(string email, string name, string surname, DateTime date)
         {
-            return Content("Sending: " + email +" "+ name+ " "+ surname+ " " + date.ToString());
+            
+            int count=repository.Users.Where(b => b.Email == email).Count();
+            if (count == 0)
+            {
+                context.Users.Add(new User { Name = name, Surname = surname, BirthDate = date, Email = email });
+                context.SaveChanges();
+                ViewBag.email = "true";
+                return View();
+            }
+            else
+            {
+                ViewBag.email = "false";
+                return View();
+            }
+
         }
         public ViewResult SignIn()
         {
