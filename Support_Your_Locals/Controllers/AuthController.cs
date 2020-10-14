@@ -56,7 +56,7 @@ namespace Support_Your_Locals.Controllers
                 if (count == 1)
                 {
                     ViewBag.email = "true";
-                    HttpContext.Session.SetJson("user", User);
+                    //HttpContext.Session.SetJson("user", User);
                     return View();
                 }
                 else

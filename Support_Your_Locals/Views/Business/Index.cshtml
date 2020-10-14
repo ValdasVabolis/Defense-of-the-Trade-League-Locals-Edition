@@ -23,44 +23,30 @@
                 </tr>
             </thead>
             <tbody>
+                @for (int i = 1; i <= 7; i++)
+                {
+                    @if (@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From == null)
+                    {
                 <tr>
-                    <td>Monday</td>
-                    <td>(@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 1)?.From ?? Closed)</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 1)?.To ?? Closed</td>
+                    <td>@Model.days[i]</td>
+                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
+                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
                 </tr>
-                <tr>
-                    <td>Tuesday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 2)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 2)?.To ?? Closed</td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 3)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 3)?.To ?? Closed</td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 4)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 4)?.To ?? Closed</td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 5)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 5)?.To ?? Closed</td>
-                </tr>
-                <tr>
-                    <td>Saturday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 6)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 6)?.To ?? Closed</td>
-                </tr>
-                <tr>
-                    <td>Sunday</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 7)?.From ?? Closed</td>
-                    <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == 7)?.To ?? Closed</td>
-                </tr>
-            </tbody>
+                     }else{
+                        <tr>
+                            <td>@Model.days[i]</td>
+                            <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From </td>
+                            <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.To </td>
+                        </tr>
+                        }
 
-        </table>
+                        }
+
+
+
+                    </tbody>
+
+            </table>
     </div>
 </div>
 <div class="col-sm-4">
