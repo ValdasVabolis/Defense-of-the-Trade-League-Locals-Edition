@@ -1,4 +1,9 @@
-﻿@model Support_Your_Locals.Models.UserRegisterModel
+﻿@model Support_Your_Locals.Models.ViewModels.UserLoginModel
+
+@{
+    Layout = "_NoNavLayout";
+}
+
 <div class="auth-container">
     <div class="container box">
         <h1>Sign In</h1>
@@ -7,21 +12,23 @@
                 <label asp-for="Email">Email</label>
                 <input asp-for="Email" class="form-control">
             </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control">
-            </div>
-            <!--<div class="form-group">
-            <label asp-for="Surname">Enter your surname</label>
-            <input asp-for="Surname" class="form-control">
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate">Enter your birth date</label>
-                <input asp-for="BirthDate" class="form-control">
-            </div>-->
+
             <div class="form-group">
                 <a asp-controller="Auth" asp-action="SignUp">Not a member yet? Sign up</a>
             </div>
+            @if (ViewBag.email == "true")
+            {
+                <div>
+                    <b><label style="color: rgb(0, 255, 0)">Successfully logged in</label></b>
+                </div>
+            }
+            else if (ViewBag.email == "false")
+            {
+                <div>
+                    <b><label style="color: rgb(255, 0, 0)">This email does not exist</label></b>
+                </div>
+            }
+            else { }
             <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
     </div>

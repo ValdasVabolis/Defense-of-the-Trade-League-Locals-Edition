@@ -1,18 +1,26 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
+using Support_Your_Locals.Models.Repositories;
+using Support_Your_Locals.Models.ViewModels;
 
 namespace Support_Your_Locals.Controllers
 {
     public class AuthController : Controller
     {
 
-        public ServiceDbContext db;
-
-        public AuthController(ServiceDbContext db)
+        private IServiceRepository repository;
+        private ServiceDbContext context;
+        public AuthController(IServiceRepository repo, ServiceDbContext serviceDbContext)
         {
-            this.db = db;
+            repository = repo;
+            context = serviceDbContext;
+
         }
 
         [HttpGet]
@@ -22,16 +30,22 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> SignUp(UserRegisterModel user)
+        public ActionResult SignUp(string name, string surname, DateTime birthDate, string email)
         {
-            if (ModelState.IsValid)
-            {
-                User newUser = new User {Name = user.Name, Surname = user.Surname, BirthDate = user.BirthDate, Email = user.Email};
-                await db.Users.AddAsync(newUser);
-                await db.SaveChangesAsync();
-                return View("Thanks");
-            }
-            return View();
+            int count = repository.Users.Count(b => b.Email == email);
+                if (count == 0)
+                {
+                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = birthDate, Email = email});
+                    context.SaveChanges();
+                    ViewBag.email = "true";
+                    return View();
+                }
+                else
+                {
+                    ViewBag.email = "false";
+                    return View();
+                }
+
         }
 
         [HttpGet]
@@ -41,19 +55,21 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> SignIn(UserLoginModel user)
+        public ActionResult SignIn(string email)
         {
-            if (ModelState.IsValid)
-            {
-                var response = await db.Users.FindAsync(user.Email);
-                if (response != null) return View("LoggedIn");
-                return View("SignIn", "User not found!");
-            }
-            else
-            {
-                return View();
-            }
+            int count = repository.Users.Count(b => b.Email == email);
+            User user = repository.Users.FirstOrDefault(b => b.Email == email);
+                if (count == 1)
+                {
+                    ViewBag.email = "true";
+                    HttpContext.Session.SetJson("user", user);
+                    return View();
+                }
+                else
+                {
+                    ViewBag.email = "false";
+                    return View();
+                }
         }
-
     }
 }

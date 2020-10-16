@@ -9,5 +9,7 @@ namespace Support_Your_Locals.Models.Repositories
     {
 
         public IQueryable<User> Users { get;}
+        public IQueryable<Business> Business { get; }
+        public IQueryable<TimeSheet> TimeSheets { get; }
     }
 }

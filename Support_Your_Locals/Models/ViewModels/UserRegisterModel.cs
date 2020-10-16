@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Support_Your_Locals.Models
+namespace Support_Your_Locals.Models.ViewModels
 {
     public class UserRegisterModel
     {

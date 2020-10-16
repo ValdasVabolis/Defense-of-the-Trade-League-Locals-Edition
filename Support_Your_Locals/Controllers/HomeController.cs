@@ -1,32 +1,40 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Support_Your_Locals.Models;
+using Support_Your_Locals.Models.Repositories;
+using Support_Your_Locals.Models.ViewModels;
+using Support_Your_Locals.Models.ViewModels.BusinessBoard;
 
 namespace Support_Your_Locals.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IServiceRepository repository;
+        public int PageSize = 4;
+
+        public HomeController(IServiceRepository repo)
         {
-            _logger = logger;
+            repository = repo;
         }
 
-        public IActionResult Index()
+        public ViewResult Index(string category, int productPage = 1)
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Add_advertise()
-        {
-            return View();
+            return View(new BusinessListViewModel
+            {
+                Businesses =
+                    repository.Business.Where(b => category == null || b.Product == category)
+                        .OrderBy(b => b.BusinessID).Skip((productPage - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = category == null
+                        ? repository.Business.Count()
+                        : repository.Business.Count(b => b.Product == category)
+                },
+                CurrentCategory = category
+            });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
