@@ -1,10 +1,14 @@
-﻿<div class="auth-container">
-    <div class="container box">
-        <div class="form-group">
-            <label>Search for a business</label>
-            <input class="form-control">
-        </div>
-        <input type="checkbox" name="searchDescription">
-        <label>Search in business Description</label>
+﻿@model BusinessListViewModel
+
+<form asp-action="Index" asp-controller="Home">
+    <div class="form-group">
+        <h4 class="text-center">Search for a business</h4>
+        <label asp-for="SearchResponse.OwnersSurname">By Owner's Surname</label>
+        <input asp-for="SearchResponse.OwnersSurname" class="form-control" />
+        <label asp-for="SearchResponse.Header">By business header</label>
+        <input asp-for="SearchResponse.Header" class="form-control" />
+        <label>Also search Description</label>
+        <input type="checkbox" asp-for="SearchResponse.SearchInDescription" />
     </div>
-</div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
 using Support_Your_Locals.Models.ViewModels;
 using Support_Your_Locals.Models.ViewModels.BusinessBoard;
@@ -18,7 +19,7 @@ namespace Support_Your_Locals.Controllers
             repository = repo;
         }
 
-        public ViewResult Index(string category, int productPage = 1)
+        public ViewResult Index(SearchResponse searchResponse, string category, int productPage = 1)
         {
             return View(new BusinessListViewModel
             {
@@ -33,7 +34,8 @@ namespace Support_Your_Locals.Controllers
                         ? repository.Business.Count()
                         : repository.Business.Count(b => b.Product == category)
                 },
-                CurrentCategory = category
+                CurrentCategory = category,
+                SearchResponse = searchResponse
             });
         }
 
