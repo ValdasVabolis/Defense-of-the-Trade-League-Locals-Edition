@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Support_Your_Locals.Models.Repositories;
 
@@ -17,10 +18,10 @@ namespace Support_Your_Locals.Models
         {
             foreach (var b in businesses)
             {
-                if (BusinessSearchConditionsMet(b))
+                if (BusinessConditionsMet(b))
                 {
                     User user = repository.Users.FirstOrDefault(u => u.UserID == b.UserID);
-                    if (!String.IsNullOrEmpty(OwnersSurname) && ChosenOwnersSurname(user))
+                    if (UserConditionsMet(user))
                     {
                         yield return new UserBusiness {User = user, Business = b};
                     }
@@ -28,7 +29,13 @@ namespace Support_Your_Locals.Models
             }
         }
 
-        private bool BusinessSearchConditionsMet(Business business)
+        private bool UserConditionsMet(User user)
+        {
+            if (!String.IsNullOrEmpty(OwnersSurname)) return ChosenOwnersSurname(user);
+            return true;
+        }
+
+        private bool BusinessConditionsMet(Business business)
         {
             if (!String.IsNullOrEmpty(Header))
             {
