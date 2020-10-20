@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Support_Your_Locals.Models.Repositories;
 
 namespace Support_Your_Locals.Models
 {
@@ -12,19 +13,23 @@ namespace Support_Your_Locals.Models
         public bool SearchInDescription { get; set; }
         public bool[] WeekdaySelected { get; set; } = new bool[7];
 
-        public IEnumerable<Business> filterBusinesses(IEnumerable<UserBusiness> usersBusinesses)
+        public IEnumerable<UserBusiness> FilterBusinesses(IEnumerable<Business> businesses, IServiceRepository repository)
         {
-            foreach (var ub in usersBusinesses)
+            foreach (var b in businesses)
             {
-                if (SearchConditionsMet(ub)) yield return ub.Business;
+                if (BusinessSearchConditionsMet(b))
+                {
+                    User user = repository.Users.FirstOrDefault(u => u.UserID == b.UserID);
+                    if (!String.IsNullOrEmpty(OwnersSurname) && ChosenOwnersSurname(user))
+                    {
+                        yield return new UserBusiness {User = user, Business = b};
+                    }
+                }
             }
         }
 
-        private bool SearchConditionsMet(UserBusiness userBusiness)
+        private bool BusinessSearchConditionsMet(Business business)
         {
-            User user = userBusiness.User;
-            Business business = userBusiness.Business;
-            if (!String.IsNullOrEmpty(OwnersSurname) && !ChosenOwnersSurname(user)) return false;
             if (!String.IsNullOrEmpty(Header))
             {
                 if (SearchInDescription)
