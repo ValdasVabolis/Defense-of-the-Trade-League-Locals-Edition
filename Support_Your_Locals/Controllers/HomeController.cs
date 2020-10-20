@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Support_Your_Locals.Models;
@@ -21,11 +23,20 @@ namespace Support_Your_Locals.Controllers
 
         public ViewResult Index(SearchResponse searchResponse, string category, int productPage = 1)
         {
+            IEnumerable<UserBusiness> usersAndBusinesses = repository.Business.
+                Where(b => category == null || b.Product == category)
+                .OrderBy(b => b.BusinessID).
+                Skip((productPage - 1) * PageSize).
+                Take(PageSize).
+                Join(repository.Users, business => business.UserID, user => user.UserID,
+                (business, user) => new UserBusiness
+                {
+                    User = user,
+                    Business = business
+                });
             return View(new BusinessListViewModel
             {
-                Businesses =
-                    repository.Business.Where(b => category == null || b.Product == category)
-                        .OrderBy(b => b.BusinessID).Skip((productPage - 1) * PageSize).Take(PageSize),
+                UsersAndBusinesses = usersAndBusinesses,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = productPage,
