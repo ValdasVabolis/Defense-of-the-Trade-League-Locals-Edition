@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
 using Support_Your_Locals.Models.ViewModels;
@@ -22,6 +25,10 @@ namespace Support_Your_Locals.Controllers
 
         public ViewResult Index(SearchResponse searchResponse, string category, int productPage = 1)
         {
+            SearchResponse searchResponseSession = HttpContext.Session.GetJson<SearchResponse>("searchResponse");
+            if (searchResponseSession == null || !String.IsNullOrEmpty(searchResponse.Header) || !String.IsNullOrEmpty(searchResponse.OwnersSurname)) HttpContext.Session.SetJson("searchResponse", searchResponse);
+            else searchResponse = searchResponseSession;
+
             IEnumerable<Business> businesses = repository.Business
                 .Where(b => category == null || b.Product == category);
             IEnumerable<UserBusinessTimeSheets> userBusinessTimeSheets = searchResponse.FilterBusinesses(businesses, repository).
