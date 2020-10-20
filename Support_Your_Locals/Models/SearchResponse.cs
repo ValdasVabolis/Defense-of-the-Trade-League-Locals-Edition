@@ -51,12 +51,12 @@ namespace Support_Your_Locals.Models
 
         private bool ChosenHeader(Business business)
         {
-            return business.Header.ToLower().Equals(Header.ToLower());
+            return business.Header.ToLower().Contains(Header.ToLower());
         }
 
         private bool ChosenDescription(Business business)
         {
-            return business.Description.ToLower().Equals(Header.ToLower()); // OK, Header is Description if search in description is ticked.
+            return business.Description.ToLower().Contains(Header.ToLower()); // OK, Header is Description if search in description is ticked.
         }
 
         //TODO: Search by working hours.
@@ -68,7 +68,7 @@ namespace Support_Your_Locals.Models
 
         private bool ChosenOwnersSurname(User user)
         {
-            return user.Surname.ToLower().Equals(OwnersSurname.ToLower());
+            return user.Surname.ToLower().Contains(OwnersSurname.ToLower());
         }
 
     }
