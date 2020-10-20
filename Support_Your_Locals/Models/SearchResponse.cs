@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Support_Your_Locals.Models.Repositories;
 
@@ -14,7 +13,7 @@ namespace Support_Your_Locals.Models
         public bool SearchInDescription { get; set; }
         public bool[] WeekdaySelected { get; set; } = new bool[7];
 
-        public IEnumerable<UserBusiness> FilterBusinesses(IEnumerable<Business> businesses, IServiceRepository repository)
+        public IEnumerable<UserBusinessTimeSheets> FilterBusinesses(IEnumerable<Business> businesses, IServiceRepository repository)
         {
             foreach (var b in businesses)
             {
@@ -23,7 +22,12 @@ namespace Support_Your_Locals.Models
                     User user = repository.Users.FirstOrDefault(u => u.UserID == b.UserID);
                     if (UserConditionsMet(user))
                     {
-                        yield return new UserBusiness {User = user, Business = b};
+                        IEnumerable<TimeSheet> timeSheets =
+                            repository.TimeSheets.Where(t => t.BusinessID == b.BusinessID);
+                        if (ChosenWeekday(timeSheets))
+                        {
+                            yield return new UserBusinessTimeSheets {User = user, Business = b, TimeSheets = timeSheets};
+                        }
                     }
                 }
             }
@@ -63,7 +67,7 @@ namespace Support_Your_Locals.Models
 
         private bool ChosenWeekday(IEnumerable<TimeSheet> timeSheets)
         {
-            return timeSheets.Count(t => WeekdaySelected[t.Weekday - 1]) == 1;
+            return timeSheets.Count(t => WeekdaySelected[t.Weekday - 1]) > 0;
         }
 
         private bool ChosenOwnersSurname(User user)

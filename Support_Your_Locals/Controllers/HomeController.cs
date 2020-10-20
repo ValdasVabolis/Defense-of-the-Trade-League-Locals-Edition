@@ -28,7 +28,7 @@ namespace Support_Your_Locals.Controllers
                 .OrderBy(b => b.BusinessID).
                 Skip((productPage - 1) * PageSize).
                 Take(PageSize);
-            IEnumerable<UserBusiness> usersAndBusinesses = searchResponse.FilterBusinesses(businesses, repository);
+            IEnumerable<UserBusinessTimeSheets> userBusinessTimeSheets = searchResponse.FilterBusinesses(businesses, repository);
                 /*Join(repository.Users, business => business.UserID, user => user.UserID,
                 (business, user) => new UserBusiness
                 {
@@ -37,7 +37,7 @@ namespace Support_Your_Locals.Controllers
                 });*/
             return View(new BusinessListViewModel
             {
-                UsersAndBusinesses = usersAndBusinesses,
+                UserBusinessTimeSheets = userBusinessTimeSheets,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = productPage,
