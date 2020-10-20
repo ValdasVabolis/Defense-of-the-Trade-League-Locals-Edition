@@ -11,7 +11,7 @@ namespace Support_Your_Locals.Models
         public string OwnersSurname { get; set; }
         public string Header { get; set; }
         public bool SearchInDescription { get; set; }
-        public bool[] WeekdaySelected { get; set; } = new bool[7];
+        public bool[] WeekdaySelected { get; set; } = {true, true, true, true, true, true, true};
 
         public IEnumerable<UserBusinessTimeSheets> FilterBusinesses(IEnumerable<Business> businesses, IServiceRepository repository)
         {
