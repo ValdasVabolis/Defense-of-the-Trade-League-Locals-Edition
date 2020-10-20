@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Support_Your_Locals.Models.Repositories;
 
@@ -31,6 +32,20 @@ namespace Support_Your_Locals.Models
                     }
                 }
             }
+        }
+
+        public bool CorrectBusiness(Business business, IServiceRepository repository)
+        {
+            if (BusinessConditionsMet(business))
+            {
+                User user = repository.Users.FirstOrDefault(u => u.UserID == business.UserID);
+                if (UserConditionsMet(user))
+                {
+                    IEnumerable<TimeSheet> timeSheets = repository.TimeSheets.Where(t => t.BusinessID == business.BusinessID);
+                    if (ChosenWeekday(timeSheets)) return true;
+                }
+            }
+            return false;
         }
 
         private bool UserConditionsMet(User user)
