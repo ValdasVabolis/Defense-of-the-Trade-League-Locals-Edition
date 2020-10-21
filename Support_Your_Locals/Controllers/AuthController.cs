@@ -30,12 +30,12 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(string name, string surname, DateTime birthDate, string email)
+        public ActionResult SignUp(string name, string surname, DateTime birthDate, string email, string passhash)
         {
             int count = repository.Users.Count(b => b.Email == email);
                 if (count == 0)
                 {
-                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = birthDate, Email = email});
+                    context.Users.Add(new User {Name = name, Surname = surname, BirthDate = birthDate, Email = email, Passhash = passhash});
                     context.SaveChanges();
                     ViewBag.email = "true";
                     return View();
@@ -55,9 +55,9 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignIn(string email)
+        public ActionResult SignIn(string email, string passhash)
         {
-            int count = repository.Users.Count(b => b.Email == email);
+            int count = repository.Users.Where(b => b.Email == email && b.Passhash == passhash).Count();
             User user = repository.Users.FirstOrDefault(b => b.Email == email);
                 if (count == 1)
                 {
