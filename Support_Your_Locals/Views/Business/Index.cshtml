@@ -27,26 +27,28 @@
                 {
                     @if (@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From == null)
                     {
-                <tr>
-                    <td>@Model.days[i]</td>
-                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
-                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
-                </tr>
-                     }else{
+                        <tr>
+                            <td>@Model.days[i]</td>
+                            <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
+                            <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
+                        </tr>
+                    }
+                    else
+                    {
                         <tr>
                             <td>@Model.days[i]</td>
                             <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From </td>
                             <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.To </td>
                         </tr>
-                        }
+                    }
 
-                        }
+                }
 
 
 
-                    </tbody>
+            </tbody>
 
-            </table>
+        </table>
     </div>
 </div>
 <div class="col-sm-4">
@@ -57,3 +59,48 @@
         <li>@Model.Business.PhoneNumber</li>
     </ul>
 </div>
+<head runat="server">
+    <title></title>
+
+    <!DOCTYPE link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <html>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script>
+
+        var mapcode;
+        var diag;
+        function initialize() {
+            mapcode = new google.maps.Geocoder();
+            var lnt = new google.maps.LatLng(54.45, 25.85);
+            var diagChoice = {
+                zoom: 9,
+                center: lnt,
+                diagId: google.maps.MapTypeId.ROADMAP
+            }
+            diag = new google.maps.Map(document.getElementById('map_populate'), diagChoice);
+        }
+       //// function getmap() {
+        //    var completeaddress = document.getElementById('txt_location').value;
+          //  mapcode.geocode({ 'address': completeaddress }, function (results, status) {
+            //    if (status == googgetmaple.maps.GeocoderStatus.OK) {
+              //      diag.setCenter(results[0].geometry.location);
+                //    var hint = new google.maps.Marker({
+                  //      diag: diag,
+                    //    position: results[0].geometry.location
+         //           });
+           //     } else {
+             //       alert('Location Not Tracked. ' + status);
+              //  }
+          //  });
+        }
+   //     google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+</html>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="map_populate" style="width:50%; height:500px; border: 5px solid #5E5454;">
+        </div>
+    </form>
+    </body>
