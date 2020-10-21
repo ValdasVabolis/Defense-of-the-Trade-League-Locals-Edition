@@ -5,6 +5,8 @@ using Support_Your_Locals.Infrastructure.Extensions;
 using Support_Your_Locals.Models;
 using Support_Your_Locals.Models.Repositories;
 using Support_Your_Locals.Models.ViewModels;
+using System;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace Support_Your_Locals.Controllers
 {
@@ -20,7 +22,7 @@ namespace Support_Your_Locals.Controllers
             context = ctx;
         }
 
-        [HttpPost]
+        [HttpGet]
         public ViewResult Index(long businessId)
         {
             Business business = repository.Business.FirstOrDefault(b => b.BusinessID == businessId);
@@ -63,6 +65,17 @@ namespace Support_Your_Locals.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ViewResult Index(string longitude, string latitude, long businessId)
+        {   
+            Business business = repository.Business.FirstOrDefault(b => b.BusinessID == businessId);
+            business.Longitude = longitude;
+            business.Latitude = latitude;
+            context.Add(business);
+
+            return Index(businessId);
         }
     }
 }
