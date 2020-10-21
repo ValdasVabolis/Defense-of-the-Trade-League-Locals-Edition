@@ -35,6 +35,11 @@ namespace Support_Your_Locals.Controllers
         {
             if (!ModelState.IsValid)
             {
+                if (user.Email == null) ViewBag.mail = "true";
+                if (user.Name == null) ViewBag.name = "true";
+                if (user.Surname == null) ViewBag.surname = "true";
+                if (user.BirthDate.Equals(DateTime.Parse("01/01/0001 12:00:00 AM"))) ViewBag.date = "true";
+                if (user.Passhash == null) ViewBag.pass = "true";
                 return View();
             }
             int count = repository.Users.Count(b => b.Email == user.Email);
@@ -74,7 +79,8 @@ namespace Support_Your_Locals.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
+                if (useris.Email == null) ViewBag.mail = "true";
+                if (useris.Passhash == null) ViewBag.pass = "true";
                 return View();
             }
             bool goodpass = false;
