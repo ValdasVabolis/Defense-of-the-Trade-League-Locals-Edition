@@ -31,14 +31,18 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(string name, string surname, DateTime birthDate, string email, string passhash)
+        public ActionResult SignUp(UserRegisterModel user)
         {
-            int count = repository.Users.Count(b => b.Email == email);
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            int count = repository.Users.Count(b => b.Email == user.Email);
                 if (count == 0)
                 {
                 byte[] salt;
                 new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
-                var pbkdf2 = new Rfc2898DeriveBytes(passhash, salt, 100000);
+                var pbkdf2 = new Rfc2898DeriveBytes(user.Passhash, salt, 100000);
                 byte[] hash = pbkdf2.GetBytes(20);
                 byte[] hashBytes = new byte[36];
                 Array.Copy(salt, 0, hashBytes, 0, 16);
@@ -46,7 +50,7 @@ namespace Support_Your_Locals.Controllers
                 string savedPasswordHash = Convert.ToBase64String(hashBytes);
 
 
-                context.Users.Add(new User {Name = name, Surname = surname, BirthDate = birthDate, Email = email, Passhash = savedPasswordHash });
+                context.Users.Add(new User {Name = user.Name, Surname = user.Surname, BirthDate = user.BirthDate, Email = user.Email, Passhash = savedPasswordHash });
                     context.SaveChanges();
                     ViewBag.email = "true";
                     return View();
@@ -66,20 +70,25 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignIn(string email, string passhash)
+        public ActionResult SignIn(UserLoginModel useris)
         {
+            if (!ModelState.IsValid)
+            {
+                
+                return View();
+            }
             bool goodpass = false;
-            User user = repository.Users.FirstOrDefault(b => b.Email == email);
+            User user = repository.Users.FirstOrDefault(b => b.Email == useris.Email);
             string savedPasswordHash = user.Passhash;
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
             byte[] salt = new byte[16];
             Array.Copy(hashBytes, 0, salt, 0, 16);
-            var pbkdf2 = new Rfc2898DeriveBytes(passhash, salt, 100000);
+            var pbkdf2 = new Rfc2898DeriveBytes(useris.Passhash, salt, 100000);
             byte[] hash = pbkdf2.GetBytes(20);
             for (int i = 0; i < 20; i++)
                 if (hashBytes[i + 16] != hash[i])
                     goodpass = true;
-            if (user.Email == email && goodpass)
+            if (user.Email == useris.Email && goodpass)
                 {
                     ViewBag.email = "true";
                     HttpContext.Session.SetJson("user", user);
