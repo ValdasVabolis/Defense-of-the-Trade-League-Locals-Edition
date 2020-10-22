@@ -50,22 +50,33 @@ $(document).ready(() => {
            }
        });
        console.log(JSON.stringify(timeSheet));
-       $.ajax({
-           url: controllerEndpoint,
-           type: 'POST',
-           data: {
+       $.post(controllerEndpoint,{ jsonData: JSON.stringify({
                postTitle: title,
                postPhoneNumber: phoneNumber,
                postEmail: email,
                postAddress: address,
                postDescription: description,
-               postTimeSheet: JSON.stringify(timeSheet)
-           },
-           success: (result) => {
+               postTimeSheet: JSON.stringify(timeSheet)}
+               )
+       }, (resp) => alert(resp));
+       /*$.ajax({
+           url: controllerEndpoint,
+           type: 'POST',
+           jsonData: JSON.stringify({ postData: {
+                   postTitle: title,
+                   postPhoneNumber: phoneNumber,
+                   postEmail: email,
+                   postAddress: address,
+                   postDescription: description,
+                   postTimeSheet: JSON.stringify(timeSheet)
+               }}),
+           dataType: 'json',
+           contentType: 'application/json',
+           success: (resp) => {
                console.log("Endpoint reached!");
-               console.log(result);
+               console.log(resp);
            }
-       });
+       });*/
    }
    
    initPostCheckBoxes();

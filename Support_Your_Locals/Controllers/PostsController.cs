@@ -23,9 +23,10 @@ namespace Support_Your_Locals.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create()
+        public JsonResult Create(string jsonData)
         {
-            return Json("received");
+            string resp = "received: " + jsonData;
+            return Json(resp);
         }
         
     }

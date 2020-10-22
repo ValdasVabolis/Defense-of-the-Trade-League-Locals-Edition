@@ -20,7 +20,9 @@ namespace Support_Your_Locals.Controllers
         {
             var posts = new List<PostModel>()
             {
-                new PostModel { Title = "Fish", PhoneNumber = "863599081", Address = "Gedimino pr. 9, Vilnius", Description = "Catch the fish and it's yours", Email = "fisherman@gmail.com", TimeSheet = "time"}
+                new PostModel { Title = "Fish", PhoneNumber = "863599081", Address = "Gedimino pr. 9, Vilnius", Description = "Catch the fish and it's yours", Email = "fisherman@gmail.com", TimeSheet = "time"},
+                new PostModel { Title = "Padangu montuotojas", PhoneNumber = "863599081", Address = "Gedimino pr. 9, Vilnius", Description = "Catch the fish and it's yours", Email = "fisherman@gmail.com", TimeSheet = "time"}
+
             };
 
             return View(posts);
