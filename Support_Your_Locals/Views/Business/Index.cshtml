@@ -27,26 +27,28 @@
                 {
                     @if (@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From == null)
                     {
-                <tr>
-                    <td>@Model.days[i]</td>
-                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
-                    <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
-                </tr>
-                     }else{
+                        <tr>
+                            <td>@Model.days[i]</td>
+                            <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
+                            <td><div style="color: rgb(255, 0, 0)">Closed</div></td>
+                        </tr>
+                    }
+                    else
+                    {
                         <tr>
                             <td>@Model.days[i]</td>
                             <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.From </td>
                             <td>@Model.TimeSheets.FirstOrDefault(t => t.Weekday == i)?.To </td>
                         </tr>
-                        }
+                    }
 
-                        }
+                }
 
 
 
-                    </tbody>
+            </tbody>
 
-            </table>
+        </table>
     </div>
 </div>
 <div class="col-sm-4">
@@ -57,3 +59,46 @@
         <li>@Model.Business.PhoneNumber</li>
     </ul>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtVY74_K7QvEKrxYmct9uV7ZorIyKdb8w&callback=initMap&libraries=&v=weekly" defer></script>
+<script>
+    function initMap() {
+
+        const latitude = Number("@Model.Business.Latitude") || 54.687;
+        const longitude = Number("@Model.Business.Longitude") || 25.279;
+        const coordinates = { lat: latitude, lng: longitude };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 14,
+            center: coordinates,
+        });
+       
+        const marker = new google.maps.Marker({
+            position: coordinates,
+            map: map,
+        });
+
+        map.addListener("click", (mapsMouseEvent) => {
+            const newPosition = mapsMouseEvent.latLng.toJSON();
+            marker.setPosition(newPosition);
+            document.getElementById("longitude").value = newPosition.lng;
+            document.getElementById("latitude").value = newPosition.lat;
+        })
+    }
+
+
+</script>
+  <style type="text/css">
+      #map {
+        height: 400px;
+        width: 50%;
+      }
+    </style>
+<br/>
+<div id="map"></div>
+
+<form method="POST">
+    <input type="hidden" id="longitude" name="longitude"/>
+    <input type="hidden" id="latitude" name="latitude"/>
+    <input type="hidden" id="businessId" value="@Model.Business.BusinessID"/>
+    <input type="submit" value="update coordinates"/>
+</form>
