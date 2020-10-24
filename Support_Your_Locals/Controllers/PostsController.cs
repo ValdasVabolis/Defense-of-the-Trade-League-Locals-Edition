@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using Support_Your_Locals.Models;
 
 namespace Support_Your_Locals.Controllers
 {
     public class PostsController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ServiceDbContext db;
         
         public IActionResult New()
         {

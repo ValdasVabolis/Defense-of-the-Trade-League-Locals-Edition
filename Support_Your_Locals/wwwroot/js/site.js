@@ -50,7 +50,8 @@ $(document).ready(() => {
            }
        });
        console.log(JSON.stringify(timeSheet));
-       $.post(controllerEndpoint,{ jsonData: JSON.stringify({
+       
+       $.post(controllerEndpoint,{ post: JSON.stringify({
                postTitle: title,
                postPhoneNumber: phoneNumber,
                postEmail: email,
